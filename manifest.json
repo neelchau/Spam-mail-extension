@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Spam Prediction Extension",
+  "version": "1.0",
+  "host_permissions": ["https://mail.google.com/*"],
+  "permissions": ["scripting", "activeTab", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["svm_model.onnx"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
